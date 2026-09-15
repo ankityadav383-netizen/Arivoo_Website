@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="assets/ums-hero.gif" data-resource-id="ums">
+<meta name="ext-resource-dependency" content="assets/sms-hero.png" data-resource-id="sms">
+<meta name="ext-resource-dependency" content="assets/lms-hero.png" data-resource-id="lms">
+<meta name="ext-resource-dependency" content="assets/testguard-hero.png" data-resource-id="testguard">
+<meta name="ext-resource-dependency" content="assets/arivoo-logo.png" data-resource-id="logo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600;700&amp;family=Noto+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./i18n.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Hanken Grotesk','Noto Sans Devanagari','Noto Sans Arabic',system-ui,sans-serif;background:#fbfaf7;color:#14151a;-webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:#5b21b6}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque','Noto Sans Devanagari','Noto Sans Arabic',sans-serif;line-height:1.04;letter-spacing:-0.02em}
+  ::selection{background:#7c3aed;color:#fff}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes lmsPulse{0%{box-shadow:0 0 0 0 rgba(124,58,237,.5)}70%{box-shadow:0 0 0 6px rgba(124,58,237,0)}100%{box-shadow:0 0 0 0 rgba(124,58,237,0)}}
+</style>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" data-bg-color="#fbfaf7">
+    <rect width="120" height="120" fill="#fbfaf7"/>
+    <rect x="30" y="30" width="60" height="60" rx="16" fill="#7c3aed"/>
+    <text x="60" y="78" font-family="Georgia, serif" font-size="40" font-weight="700" fill="#ffffff" text-anchor="middle">a</text>
+  </svg>
+</template>
+</helmet>
+
+<div style="width:100%;overflow-x:clip;background:#fbfaf7">
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:50;background:rgba(251,250,247,.82);backdrop-filter:saturate(180%) blur(14px);box-shadow:0 1px 0 rgba(20,21,26,.06)">
+  <div style="max-width:1240px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Arivoo%20Home.dc.html" style="display:flex;align-items:center">
+      <img src="assets/arivoo-logo-powered.png" alt="arivoo" style="height:42px;width:auto;display:block">
+    </a>
+    <div style="display:flex;align-items:center;gap:30px;font-size:15px;font-weight:500;color:#3a3d47">
+      <div style="position:relative" onMouseEnter="{{ hoverOn }}" onMouseLeave="{{ hoverOff }}">
+        <a href="Arivoo%20Home.dc.html#products" style="display:flex;align-items:center;gap:6px;padding:24px 0;color:{{ navMenuFg }};transition:color .2s">{{ ui.products }}
+          <span style="display:inline-flex;transition:transform .25s;transform:rotate({{ navChevron }})">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.25L6 7.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <div style="{{ navPanelStyle }}">
+          <div style="background:#fff;border:1px solid #eceae4;border-radius:20px;box-shadow:0 34px 80px -18px rgba(20,21,26,.32);overflow:hidden;padding:28px 30px">
+            <div style="font-size:12px;font-weight:800;letter-spacing:.09em;color:#9a9ea9;text-transform:uppercase">{{ ui.featured }}</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:12px">
+              <sc-for list="{{ navProducts }}" as="p" hint-placeholder-count="4">
+                <a href="{{ p.href }}" onClick="{{ closeNav }}" style="display:flex;align-items:center;gap:13px;padding:12px;border-radius:12px;transition:background .18s" style-hover="background:#f6f5f1">
+                  <span style="flex:none;width:70px;height:46px;border-radius:10px;display:grid;place-items:center;background:#ffffff;padding:0 9px"><img data-src="{{ p.logo }}" alt="{{ p.name }}" style="max-width:100%;max-height:26px;width:auto;height:auto;display:block;object-fit:contain"></span>
+                  <span style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:14.5px;font-weight:700;color:#14151a;line-height:1.15">{{ p.name }}</span>
+                    <span style="font-size:12.5px;font-weight:500;color:#8a8e99;line-height:1.2">{{ p.tag }}</span>
+                  </span>
+                </a>
+              </sc-for>
+            </div>
+            <div style="margin-top:22px;padding-top:22px;border-top:1px solid #f0efe9;display:flex;align-items:flex-start;gap:14px">
+              <span style="font-family:'Bricolage Grotesque';font-size:40px;font-weight:800;line-height:.7;color:#7c3aed;flex:none">“</span>
+              <p style="font-size:16px;font-weight:600;color:#2b2e37;line-height:1.5;text-wrap:pretty;margin:0">{{ ui.quote }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <label style="position:relative;display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#14151a;cursor:pointer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14151a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15 15 0 0 1 0 18"></path><path d="M12 3a15 15 0 0 0 0 18"></path></svg>
+        <select aria-label="Language" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding-right:15px;outline:none" value="{{ lang }}" onChange="{{ setLang }}">
+          <option value="en">EN</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ar">العربية</option>
+        </select>
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#14151a" stroke-width="1.6" style="position:absolute;right:0;pointer-events:none"><path d="M2.5 4.5L6 8l3.5-3.5"></path></svg>
+      </label>
+      <a href="Arivoo%20Book%20a%20Demo.dc.html" style="display:inline-flex;align-items:center;gap:8px;background:#14151a;color:#fff;font-weight:600;font-size:15px;padding:11px 20px;border-radius:11px;transition:transform .2s,background .2s" style-hover="background:#7c3aed;transform:translateY(-1px)">{{ ui.bookDemo }} <span style="font-size:16px">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header style="max-width:1240px;margin:0 auto;padding:70px 32px 40px;display:grid;grid-template-columns:1.02fr 0.98fr;gap:56px;align-items:center">
+  <div>
+    <img data-src="{{ logo }}" alt="arivoo {{ short }}" style="height:46px;width:auto;display:block">
+    <h1 style="font-size:clamp(36px,5vw,58px);font-weight:700;margin-top:22px;text-wrap:balance;line-height:1.02">{{ heroTitle }}</h1>
+    <p style="font-size:19px;color:#4b4f5c;margin-top:20px;line-height:1.55;max-width:520px;text-wrap:pretty">{{ heroSub }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:13px;margin-top:32px">
+      <a href="Arivoo%20Book%20a%20Demo.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:#7c3aed;color:#fff;font-weight:600;font-size:16px;padding:15px 28px;border-radius:13px;box-shadow:0 12px 28px rgba(18,111,184,.28);transition:transform .2s,background .2s" style-hover="background:#0c5896;transform:translateY(-2px)">{{ ui.getDemo }} <span>→</span></a>
+      <a href="#features" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#7c3aed;font-weight:600;font-size:16px;padding:15px 26px;border-radius:13px;border:1.5px solid #d3e3f1;transition:border-color .2s,transform .2s" style-hover="border-color:#7c3aed;transform:translateY(-2px)">{{ ui.viewFeatures }}</a>
+    </div>
+  </div>
+  <div style="position:relative">
+    <div style="position:absolute;inset:-9% -6%;border-radius:44px;background:linear-gradient(135deg,{{ accent }}2e,{{ tint }} 70%)"></div>
+    <img data-src="{{ heroImg }}" alt="{{ name }}" style="position:relative;z-index:2;width:100%;height:auto;display:block;border-radius:20px;animation:floaty 7s ease-in-out infinite">
+  </div>
+</header>
+
+<!-- VIDEO -->
+<sc-if value="{{ videoId }}" hint-placeholder-val="{{ true }}">
+<section style="max-width:1000px;margin:90px auto 0;padding:0 32px">
+  <div style="text-align:center">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">{{ ui.seeInAction }}</div>
+    <h2 style="font-size:clamp(28px,3.6vw,42px);font-weight:700;margin-top:14px;text-wrap:balance">{{ videoHeading }}</h2>
+  </div>
+  <div style="position:relative;margin-top:40px;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(18,111,184,.18);background:#000;aspect-ratio:16/9">
+    <sc-if value="{{ videoPlaying }}" hint-placeholder-val="{{ false }}">
+      <iframe src="{{ videoSrc }}" title="{{ name }} video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+    </sc-if>
+    <sc-if value="{{ videoIdle }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ playVideo }}" aria-label="Play video" style="position:absolute;inset:0;border:none;padding:0;margin:0;cursor:pointer;background:#000">
+        <img data-src="{{ videoThumb }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85">
+        <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+          <span style="width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(0,0,0,.4)">
+            <svg width="30" height="34" viewBox="0 0 30 34" fill="none"><path d="M28.5 15.27a2 2 0 0 1 0 3.46L3.5 33.06A2 2 0 0 1 .5 31.33V2.67A2 2 0 0 1 3.5.94L28.5 15.27Z" fill="{{ accent }}"></path></svg>
+          </span>
+        </span>
+      </button>
+    </sc-if>
+  </div>
+</section>
+</sc-if>
+
+<!-- ROLES -->
+<section style="max-width:1240px;margin:96px auto 0;padding:0 32px">
+  <div style="text-align:center">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">{{ ui.builtForEveryone }}</div>
+    <h2 style="font-size:clamp(28px,3.6vw,42px);font-weight:700;margin-top:14px;text-wrap:balance">{{ rolesHeading }}</h2>
+  </div>
+  <div style="max-width:1080px;margin:40px auto 0">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <button type="button" onClick="{{ role0.go }}" onMouseEnter="{{ role0.go }}" style="{{ role0.tabStyle }}">
+        <span style="{{ role0.iconStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v17H6a2 2 0 0 0-2 2z"></path><path d="M20 5a2 2 0 0 0-2-2h-6v17h6a2 2 0 0 1 2 2z"></path></svg></span>
+        <span style="{{ role0.titleStyle }}">{{ role0.title }}</span>
+        <span style="{{ role0.chevStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+      </button>
+      <button type="button" onClick="{{ role1.go }}" onMouseEnter="{{ role1.go }}" style="{{ role1.tabStyle }}">
+        <span style="{{ role1.iconStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"></path><path d="M14 3v5h5"></path><path d="M9 15l2 2 4-4"></path></svg></span>
+        <span style="{{ role1.titleStyle }}">{{ role1.title }}</span>
+        <span style="{{ role1.chevStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+      </button>
+      <button type="button" onClick="{{ role2.go }}" onMouseEnter="{{ role2.go }}" style="{{ role2.tabStyle }}">
+        <span style="{{ role2.iconStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path><path d="M7.5 13h3M7.5 16.5h6"></path></svg></span>
+        <span style="{{ role2.titleStyle }}">{{ role2.title }}</span>
+        <span style="{{ role2.chevStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+      </button>
+    </div>
+
+    <div style="background:#fff;border:1.5px solid #eceae4;border-radius:22px;padding:30px 32px;margin-top:18px;box-shadow:0 24px 60px rgba(20,21,26,.07)">
+      <div style="display:flex;align-items:center;gap:16px">
+        <span style="{{ activeRole.bigIconStyle }}">
+          <sc-if value="{{ activeRole.isCourse }}" hint-placeholder-val="{{ true }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v17H6a2 2 0 0 0-2 2z"></path><path d="M20 5a2 2 0 0 0-2-2h-6v17h6a2 2 0 0 1 2 2z"></path></svg></sc-if>
+          <sc-if value="{{ activeRole.isExam }}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"></path><path d="M14 3v5h5"></path><path d="M9 15l2 2 4-4"></path></svg></sc-if>
+          <sc-if value="{{ activeRole.isRoutine }}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path><path d="M7.5 13h3M7.5 16.5h6"></path></svg></sc-if>
+        </span>
+        <div style="min-width:0">
+          <div style="font-family:'Bricolage Grotesque';font-size:24px;font-weight:700">{{ activeRole.title }}</div>
+          <p style="font-size:14.5px;color:#5b5f6b;margin-top:4px;max-width:520px;line-height:1.5;text-wrap:pretty">{{ activeRole.body }}</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 0.9fr;gap:26px;margin-top:26px">
+        <div style="display:flex;flex-direction:column;gap:13px">
+          <div style="font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#9a9ea9">What you can do</div>
+          <sc-for list="{{ activeRole.caps }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:11px">
+              <span style="flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:{{ tint }};color:{{ accent }};margin-top:1px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"></path></svg></span>
+              <span style="font-size:14.5px;color:#2b2e37;font-weight:500;line-height:1.4">{{ c.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="border:1px solid #eceae4;border-radius:16px;overflow:hidden;background:#fbfbf9;align-self:start">
+          <div style="display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #f0efe9">
+            <span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span>
+            <span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span>
+            <span style="width:9px;height:9px;border-radius:50%;background:#28c840"></span>
+            <span style="margin-left:8px;font-size:12px;font-weight:600;color:#9a9ea9">{{ activeRole.screen }}</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ activeRole.rows }}" as="row" hint-placeholder-count="3">
+              <div style="background:#fff;border:1px solid #f0efe9;border-radius:11px;padding:11px 13px">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                  <span style="font-size:12.5px;color:#8b8f9a;font-weight:600">{{ row.label }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Bricolage Grotesque';font-size:13px;font-weight:800;color:{{ row.color }}"><sc-if value="{{ row.live }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ accent }};animation:lmsPulse 1.6s infinite"></span></sc-if>{{ row.val }}</span>
+                </div>
+                <sc-if value="{{ row.hasBar }}" hint-placeholder-val="{{ false }}">
+                  <div style="height:6px;border-radius:100px;background:{{ tint }};margin-top:9px;overflow:hidden"><div style="height:100%;border-radius:100px;background:{{ accent }};width:{{ row.pct }}"></div></div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;padding-top:22px;border-top:1px solid #f0efe9">
+        <sc-for list="{{ activeRole.stats }}" as="s" hint-placeholder-count="3">
+          <div style="background:{{ tint }};border-radius:14px;padding:16px 18px">
+            <div style="font-family:'Bricolage Grotesque';font-size:30px;font-weight:800;color:{{ accent }};line-height:1">{{ s.display }}</div>
+            <div style="font-size:12.5px;color:#5b5f6b;font-weight:600;margin-top:7px">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section style="max-width:1240px;margin:100px auto 0;padding:0 32px">
+  <div style="text-align:center">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">{{ whyLabel }}</div>
+    <h2 style="font-size:clamp(28px,3.6vw,42px);font-weight:700;margin-top:14px;text-wrap:balance">{{ whyHeading }}</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px">
+    <sc-for list="{{ whyCards }}" as="w" hint-placeholder-count="6">
+      <div style="background:#fff;border:1px solid #eceae4;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,border-color .2s" style-hover="transform:translateY(-4px);border-color:#d9d6cc">
+        <span style="width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;background:{{ tint }};color:{{ accent }}">
+          <sc-if value="{{ w.is0 }}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M16 11l2 2 4-4"></path></svg></sc-if>
+          <sc-if value="{{ w.is1 }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"></rect><path d="M16 10l6-3v10l-6-3"></path><circle cx="9" cy="12" r="2.4"></circle></svg></sc-if>
+          <sc-if value="{{ w.is2 }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h7M15 18h5"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="13" cy="18" r="2"></circle></svg></sc-if>
+          <sc-if value="{{ w.is3 }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"></path><path d="M14 3v5h5"></path><path d="M9 15l2 2 4-4"></path></svg></sc-if>
+          <sc-if value="{{ w.is4 }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path><path d="M7.5 13h3M7.5 16.5h6"></path></svg></sc-if>
+          <sc-if value="{{ w.is5 }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path><path d="M19 7v3h-3"></path></svg></sc-if>
+        </span>
+        <div style="font-family:'Bricolage Grotesque';font-size:18px;font-weight:700">{{ w.title }}</div>
+        <p style="font-size:14.5px;color:#5b5f6b;line-height:1.5;text-wrap:pretty">{{ w.body }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section id="features" style="max-width:1240px;margin:100px auto 0;padding:0 32px">
+  <div style="background:{{ tint }};border-radius:28px;padding:56px 48px">
+    <div style="text-align:center">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">{{ ui.keyModules }}</div>
+      <h2 style="font-size:clamp(26px,3.4vw,40px);font-weight:700;margin-top:14px;text-wrap:balance;max-width:720px;margin-inline:auto">{{ moduleHeading }}</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:36px">
+      <sc-for list="{{ modules }}" as="m" hint-placeholder-count="14">
+        <div style="display:flex;align-items:center;gap:9px;background:#fff;border-radius:12px;padding:12px 18px;font-size:14.5px;font-weight:600;color:#2b2e37;box-shadow:0 4px 14px rgba(20,21,26,.05)">
+          <span style="width:7px;height:7px;border-radius:50%;background:{{ accent }};flex:none"></span>{{ m }}
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="demo" style="max-width:1240px;margin:110px auto 0;padding:0 32px">
+  <div style="background:linear-gradient(135deg,#7c3aed,#5b21b6);border-radius:30px;padding:72px 56px;text-align:center;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-60px;left:-40px;width:320px;height:320px;border:1px solid rgba(255,255,255,.14);border-radius:50%"></div>
+    <div style="position:absolute;bottom:-90px;right:-30px;width:280px;height:280px;border:1px solid rgba(255,255,255,.14);border-radius:50%"></div>
+    <div style="position:relative">
+      <h2 style="font-size:clamp(30px,4vw,48px);font-weight:700;text-wrap:balance;max-width:720px;margin-inline:auto">{{ ctaTitle }}</h2>
+      <p style="font-size:18px;color:rgba(255,255,255,.82);margin-top:16px;max-width:540px;margin-inline:auto">{{ ctaSub }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:34px">
+        <a href="Arivoo%20Book%20a%20Demo.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#7c3aed;font-weight:700;font-size:16px;padding:15px 30px;border-radius:13px;transition:transform .2s" style-hover="transform:translateY(-2px)">{{ ui.requestDemo }} <span>→</span></a>
+        <a href="Arivoo%20Home.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.12);color:#fff;font-weight:600;font-size:16px;padding:15px 28px;border-radius:13px;border:1px solid rgba(255,255,255,.28);transition:background .2s" style-hover="background:rgba(255,255,255,.2)">{{ ui.exploreAll }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0b0c10;color:#fff;margin-top:110px">
+  <div style="max-width:1240px;margin:0 auto;padding:76px 32px 0">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px">
+      <div>
+        <img src="assets/arivoo-mark.png" alt="arivoo — powered by Adamas Tech Consulting" style="height:42px;width:auto;display:block">
+        <p style="font-size:14px;color:#8a8f9c;margin-top:18px;max-width:260px;line-height:1.6;text-wrap:pretty">Education management, unified. A product of Adamas Tech Consulting.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">
+          <span style="font-size:12px;font-weight:600;color:#b7bcc7;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:100px">Bengaluru</span>
+          <span style="font-size:12px;font-weight:600;color:#b7bcc7;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:100px">Kolkata</span>
+          <span style="font-size:12px;font-weight:600;color:#b7bcc7;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:100px">London</span>
+          <span style="font-size:12px;font-weight:600;color:#b7bcc7;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:100px">San Francisco</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#f3f4f6">Products</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-top:18px">
+          <a href="Arivoo%20UMS.dc.html" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">University Management</a>
+          <a href="Arivoo%20SMS.dc.html" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">School Management</a>
+          <a href="Arivoo%20LMS.dc.html" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Learning Management</a>
+          <a href="Arivoo%20TestGUARD.dc.html" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">TestGUARD</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#f3f4f6">Company</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-top:18px">
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">About Adamas Tech</a>
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Who are we?</a>
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Careers</a>
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#f3f4f6">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-top:18px">
+          <a href="Arivoo%20Book%20a%20Demo.dc.html" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Request a demo</a>
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Documentation</a>
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Support</a>
+          <a href="#top" style="font-size:14.5px;color:#9297a3;font-weight:500;transition:color .2s;width:fit-content" style-hover="color:#ffffff">Status</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:52px">
+      <a href="#top" aria-label="LinkedIn" style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:#b7bcc7;transition:background .2s,color .2s" style-hover="background:rgba(255,255,255,.12);color:#ffffff">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.32 8.06h4.33V24H.32V8.06zM8.34 8.06h4.15v2.18h.06c.58-1.1 2-2.26 4.12-2.26 4.4 0 5.22 2.9 5.22 6.67V24h-4.33v-6.53c0-1.56-.03-3.56-2.17-3.56-2.17 0-2.5 1.7-2.5 3.45V24H8.34V8.06z"/></svg>
+      </a>
+      <a href="#top" aria-label="X" style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:#b7bcc7;transition:background .2s,color .2s" style-hover="background:rgba(255,255,255,.12);color:#ffffff">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26L22.82 21.75h-6.66l-5.22-6.82-5.97 6.82H1.66l7.73-8.83L1.15 2.25h6.83l4.72 6.24 5.54-6.24zm-1.16 17.52h1.83L7.01 4.13H5.05l12.03 15.64z"/></svg>
+      </a>
+      <a href="#top" aria-label="Instagram" style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:#b7bcc7;transition:background .2s,color .2s" style-hover="background:rgba(255,255,255,.12);color:#ffffff">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+      </a>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.1);margin-top:22px;padding:22px 0 30px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center">
+      <span style="font-size:13px;color:#7c8290;font-weight:500">{{ ui.copyright }}</span>
+      <div style="display:flex;gap:26px;font-size:13px;font-weight:500">
+        <a href="#top" style="color:#7c8290;transition:color .2s" style-hover="color:#ffffff">Privacy Policy</a>
+        <a href="#top" style="color:#7c8290;transition:color .2s" style-hover="color:#ffffff">Terms of use</a>
+        <a href="#top" style="color:#7c8290;transition:color .2s" style-hover="color:#ffffff">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 265.69 64.56" preserveAspectRatio="xMidYMax meet" style="display:block;width:min(70%,860px);margin:0 auto -1.6%;fill:#ffffff;opacity:.055;user-select:none;pointer-events:none">
+      <path d="M176.54,11.04c3.76,0,13.02,1.5,19.28,7.76,1.5,1.5,3,2.75,4.51,3.76,11.02,7.01,23.54,3,30.3-3.76,2.75-3,5.26-4.76,7.51-6.01s4.76-1.75,8.01-1.75,5.01-2.25,5.01-5.01-2.25-5.01-5.01-5.01c-4.51,0-8.51,1-12.27,2.75-3.76,1.75-7.01,4.51-10.27,8.01-4.51,4.76-13.52,7.01-20.53,0-8.76-8.76-21.29-10.77-26.54-10.77-2.75,0-5.01,2.25-5.01,5.01s2.25,5.01,5.01,5.01Z"></path>
+      <path d="M55.59,36.33v26.29h13.02v-25.79c0-5.51,3-8.76,8.26-8.76s5.01.75,7.26,2v-12.77c-2.25-1-5.51-1.5-8.51-1.5-13.52,0-20.03,9.01-20.03,20.78v-.25Z"></path>
+      <path d="M24.54,15.8C10.77,15.8,0,26.81,0,39.84s9.27,24.04,22.29,24.04,11.27-2.5,14.27-6.51v5.26h12.27v-22.79c0-13.77-10.77-24.04-24.54-24.04h.25ZM24.54,51.36c-6.76,0-11.52-5.26-11.52-11.77s4.76-11.77,11.52-11.77,11.52,5.26,11.52,11.77-5.01,11.77-11.52,11.77Z"></path>
+      <path d="M246.66,16.3h-.5c-2.5,0-4.01.5-5.51,1.25-1.5.75-3.51,2.25-6.01,5.01-4.01,4.26-10.02,7.51-16.53,8.76-1,2.75-1.5,5.51-1.5,8.51,0,13.27,10.52,24.04,24.54,24.04s24.54-11.02,24.54-24.04-8.01-20.78-18.78-23.29l-.25-.25ZM240.9,51.36c-6.76,0-11.52-5.26-11.52-11.77s4.76-11.77,11.52-11.77,11.52,5.26,11.52,11.77-5.01,11.77-11.52,11.77Z"></path>
+      <path d="M178.45,16.98h.5c2.5,0,4.01.5,5.51,1.25,1.5.75,3.51,2.25,6.01,5.01,4.01,4.26,10.02,7.51,16.53,8.76,1,2.75,1.5,5.51,1.5,8.51,0,13.27-10.52,24.04-24.54,24.04s-24.54-11.02-24.54-24.04,7.57-20.89,18.34-23.39l.69-.14ZM184.21,52.04c6.76,0,11.52-5.26,11.52-11.77s-4.76-11.77-11.52-11.77-11.52,5.26-11.52,11.77,5.01,11.77,11.52,11.77Z"></path>
+      <path d="M134.22,51.1l-11.77-34.06h-13.77l13.77,38.06c2,6.01,6.26,8.76,11.77,8.76s9.52-3,11.77-8.76l14.02-38.06h-13.77l-11.77,34.06h-.25Z"></path>
+      <rect x="89.65" y="17.05" width="13.02" height="45.57"></rect>
+      <path d="M187.06.27l-.5,2.5c2,.5,7.51,1.75,16.53,9.52,10.77,9.52,18.78,1.5,24.04-3.26,4.01-4.01,8.01-5.51,10.27-6.51l-1-2.25c-2-.5-6.26,0-13.02,3-7.01,3.26-10.02,6.51-11.02,8.26-.75-1-3-5.26-9.52-8.26-6.51-3-13.27-3.76-16.03-3h.25Z"></path>
+    </svg>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { navOpen:false, roleActive:0, statNums:[0,0,0], lang:(function(){ try{ return localStorage.getItem('arivoo_lang')||'en'; }catch(e){ return 'en'; } })() };
+  _statTargets = [[32,860,12],[18,94,3],[24,6,98]];
+  componentDidMount(){ this._applyImgs(); this._applyDir(); this._animStats(0); if(this.state.lang!=='en') setTimeout(()=>this.forceUpdate(),0); }
+  selectRole(i){ if(i===this.state.roleActive) return; this.setState({roleActive:i}); this._animStats(i); }
+  _animStats(i){
+    if(this._raf) cancelAnimationFrame(this._raf);
+    const targets=this._statTargets[i]||[0,0,0];
+    const start=(typeof performance!=='undefined'?performance.now():Date.now()), dur=850;
+    const tick=(now)=>{
+      const p=Math.min(1,(now-start)/dur), e=1-Math.pow(1-p,3);
+      this.setState({statNums:targets.map(t=>t*e)});
+      if(p<1) this._raf=requestAnimationFrame(tick);
+    };
+    this._raf=requestAnimationFrame(tick);
+  }
+  _applyDir(){ try{ var rtl=this.state.lang==='ar'; document.documentElement.setAttribute('dir', rtl?'rtl':'ltr'); document.documentElement.setAttribute('lang', this.state.lang); }catch(e){} }
+  setLang(l){ try{ localStorage.setItem('arivoo_lang', l); }catch(e){} this.setState({lang:l}, ()=>this._applyDir()); }
+  componentDidUpdate(){ this._applyImgs(); }
+  _applyImgs(){ try{ document.querySelectorAll('img[data-src]').forEach(el=>{ const v=el.getAttribute('data-src'); if(v && el.getAttribute('src')!==v) el.setAttribute('src', v); }); }catch(e){} }
+
+  renderVals(){
+    const P = {
+      name:'Learning Management System', short:'LMS', mark:'L',
+      accent:'#7c3aed', tint:'#f1ecfd', logo:'https://arivoo.in/wp-content/uploads/2023/10/Frame-15.png',
+      heroImg:(window.__resources&&window.__resources.lms)||'assets/lms-hero.png',
+      heroTitle:'Deliver, manage and track learning.',
+      heroSub:'Courses, exams and routines in one place — with AI-powered attendance and class recordings for flexible, effective learning.',
+      videoId:'Wk3wm9ZaB30',
+      videoHeading:'Watch arivoo LMS in action.',
+      rolesHeading:"What's inside arivoo LMS.",
+      roles:[
+        {mark:'C', title:'Courses', body:'Scheduling, assignments, resources and student tracking for a well-organised learning environment.'},
+        {mark:'E', title:'Exams', body:'Scheduling, templates and analytics for an efficient, organised assessment process.'},
+        {mark:'R', title:'Routines', body:'Create, track and adjust routines for an organised and productive workflow.'},
+      ],
+      whyHeading:'Why educators choose arivoo LMS.',
+      why:[
+        {title:'AI-powered attendance', body:'Automate roll calls, prevent errors and get real-time attendance insights.'},
+        {title:'Class recordings', body:'Students revisit recorded lectures anytime to reinforce understanding.'},
+        {title:'Customise courses', body:'Create courses, establish sections and assign teachers to build content.'},
+        {title:'Configure exams', body:'Assign exams to any course with flexible, need-based configurations.'},
+        {title:'Organise routines', body:'Create routines for courses and sections, then assign teachers.'},
+        {title:'Progress monitoring', body:'Programme creation with flexible tagging to monitor student progress.'},
+      ],
+      moduleHeading:'Everything you need to plan, teach and learn.',
+      modules:['Accounts','Roles & Permissions','Programmes','Course & Content','Routines & Events','Examination','Assignments & Quizzes','Live Classes','Progress Tracking','Library','Class Recordings','Analytics & Reporting'],
+      ctaTitle:'Elevate education with arivoo LMS.',
+    };
+
+    const navProducts = [
+      {name:'University Management System', mark:'U', logo:'https://arivoo.in/wp-content/uploads/2023/11/arivoo-ums-logo.png', tint:'#e4f0f9', accent:'#7c3aed', tag:'Run the entire campus on one system', href:'Arivoo%20UMS.dc.html'},
+      {name:'School Management System', mark:'S', logo:'https://arivoo.in/wp-content/uploads/2023/11/Arivo_Buzzed_Rebranding-02-02-1.png', tint:'#e6f6ef', accent:'#1f9d6b', tag:'School operations, simplified', href:'Arivoo%20SMS.dc.html'},
+      {name:'Learning Management System', mark:'L', logo:'https://arivoo.in/wp-content/uploads/2023/10/Frame-15.png', tint:'#f1ecfd', accent:'#7c3aed', tag:'Deliver, manage & track learning', href:'Arivoo%20LMS.dc.html'},
+      {name:'TestGUARD — Online Assessment', mark:'T', logo:'https://arivoo.in/wp-content/uploads/2024/09/arivoo-TestGUARD-5-1.png', tint:'#eceefe', accent:'#6366f1', tag:'Secure exams with AI proctoring', href:'Arivoo%20TestGUARD.dc.html'},
+    ];
+
+    const lang = this.state.lang || 'en';
+    const I18 = window.ARIVOO_I18N || {};
+    const pageKey = ({UMS:'ums',SMS:'sms',LMS:'lms',TestGUARD:'testguard'})[P.short];
+    const uiEN = { products:'Products', featured:'Featured products', quote:'One platform instead of ten. Admissions, teaching, exams and finance finally speak the same language — so your team spends time on students, not spreadsheets.', bookDemo:'Book a demo', getDemo:'Get a free demo', viewFeatures:'View features', seeInAction:'See it in action', builtForEveryone:'Built for everyone', whyPrefix:'Why', keyModules:'Key modules', requestDemo:'Request a demo', exploreAll:'Explore all products', ctaSubTmpl:'See {name} running your institution — book a personalised walkthrough.', copyright:'\u00A9 2026 Adamas Tech Consulting \u2014 All Rights Reserved', navProducts:null };
+    const ui = Object.assign({}, uiEN, (I18.ui&&I18.ui[lang])||{});
+    const LP = Object.assign({}, P, (I18.pages&&I18.pages[pageKey]&&I18.pages[pageKey][lang])||{});
+    const navProductsL = navProducts.map((p,i)=> Object.assign({}, p, (ui.navProducts&&ui.navProducts[i])||{}));
+    const whyLabel = ui.whyPrefix + ' ' + P.short;
+    const ctaSub = (ui.ctaSubTmpl||'').replace('{name}', LP.name);
+    const whySrc = (LP.why||P.why||[]);
+    const whyCards = whySrc.map((w,i)=>({ title:w.title, body:w.body, is0:i===0, is1:i===1, is2:i===2, is3:i===3, is4:i===4, is5:i===5 }));
+
+    // ---- interactive roles explorer ----
+    const rolesL = (LP.roles||P.roles||[]);
+    const roleMeta = [
+      { caps:['Schedule courses, sections & lessons','Attach assignments, quizzes & resources','Track student progress in real time','Assign teachers and manage content'],
+        screen:'Course builder',
+        rows:[['Course setup','Complete',P.accent,false,false,''],['Content uploaded','78%','#14151a',false,true,'78%'],['Students enrolled','Live',P.accent,true,false,'']],
+        stats:[{suffix:'',label:'Active courses'},{suffix:'',label:'Resources shared'},{suffix:'',label:'Sections running'}] },
+      { caps:['Build exams from reusable templates','Schedule with flexible configurations','Auto-grade and publish results','Read analytics on every question'],
+        screen:'Exam analytics',
+        rows:[['Papers graded','100%',P.accent,false,true,'100%'],['Average score','94%','#14151a',false,true,'94%'],['Live exams','Now',P.accent,true,false,'']],
+        stats:[{suffix:'',label:'Exam templates'},{suffix:'%',label:'Auto-graded'},{suffix:'',label:'Result sets published'}] },
+      { caps:['Create routines for courses & sections','Assign teachers to each slot','Adjust and reshuffle in seconds','Sync events to every calendar'],
+        screen:'Weekly routine',
+        rows:[['This week','Mon–Sat','#14151a',false,false,''],['Slots filled','96%','#14151a',false,true,'96%'],['Live classes','2 now',P.accent,true,false,'']],
+        stats:[{suffix:'',label:'Weekly slots'},{suffix:'',label:'Reschedules needed'},{suffix:'%',label:'Timetable coverage'}] },
+    ];
+    const ra = this.state.roleActive||0;
+    const nums = this.state.statNums||[0,0,0];
+    const mkTab = (i)=>{ const on=(i===ra); return {
+      title:(rolesL[i]&&rolesL[i].title)||'',
+      go:()=>this.selectRole(i),
+      tabStyle:'display:flex;align-items:center;gap:13px;width:100%;text-align:left;cursor:pointer;border-radius:16px;padding:15px 16px;transition:all .22s;'+(on?('background:'+P.tint+';border:1.5px solid '+P.accent+';box-shadow:0 14px 30px '+P.accent+'22'):'background:#fff;border:1.5px solid #eceae4'),
+      iconStyle:'width:46px;height:46px;border-radius:13px;flex:none;display:grid;place-items:center;transition:all .22s;'+(on?('background:'+P.accent+';color:#fff'):('background:'+P.tint+';color:'+P.accent)),
+      titleStyle:'font-family:\'Bricolage Grotesque\';font-size:16px;font-weight:700;color:#14151a;flex:1;min-width:0',
+      chevStyle:'flex:none;transition:all .22s;color:'+(on?P.accent:'#c2c5cd')+';transform:translateX('+(on?'0':'-5px')+');opacity:'+(on?'1':'0'),
+    }; };
+    const role0=mkTab(0), role1=mkTab(1), role2=mkTab(2);
+    const am = roleMeta[ra]||roleMeta[0];
+    const activeRole = {
+      title:(rolesL[ra]&&rolesL[ra].title)||'',
+      body:(rolesL[ra]&&rolesL[ra].body)||'',
+      screen:am.screen,
+      isCourse:ra===0, isExam:ra===1, isRoutine:ra===2,
+      caps:am.caps.map(c=>({t:c})),
+      rows:am.rows.map(r=>({label:r[0], val:r[1], color:r[2], live:r[3], hasBar:r[4], pct:r[5]})),
+      stats:am.stats.map((s,i)=>({label:s.label, display:Math.round(nums[i]||0)+(s.suffix||'')})),
+      bigIconStyle:'width:58px;height:58px;border-radius:16px;flex:none;display:grid;place-items:center;background:'+P.tint+';color:'+P.accent,
+    };
+    return Object.assign({}, LP, {
+      navProducts: navProductsL,
+      whyCards,
+      role0, role1, role2, activeRole,
+      ui, whyLabel, ctaSub, lang,
+      setLang:(e)=>this.setLang(e.target.value),
+      rolesCols: P.roles.length,
+      videoSrc: P.videoId ? ('https://www.youtube-nocookie.com/embed/'+P.videoId+'?rel=0&modestbranding=1&autoplay=1&playsinline=1') : '',
+      videoThumb: P.videoId ? ('https://img.youtube.com/vi/'+P.videoId+'/hqdefault.jpg') : '',
+      videoPlaying: !!this.state.videoPlaying,
+      videoIdle: !this.state.videoPlaying,
+      playVideo: ()=>this.setState({videoPlaying:true}),
+      hoverOn: ()=>this.setState({navOpen:true}),
+      hoverOff: ()=>this.setState({navOpen:false}),
+      closeNav: ()=>this.setState({navOpen:false}),
+      navMenuFg: this.state.navOpen ? '#7c3aed' : '#3a3d47',
+      navChevron: this.state.navOpen ? '180deg' : '0deg',
+      navPanelStyle: 'position:fixed;left:50%;top:56px;width:min(720px,94vw);z-index:60;padding-top:12px;transition:opacity .22s ease,transform .22s ease;transform-origin:top center;'
+        + (this.state.navOpen ? 'opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto' : 'opacity:0;transform:translateX(-50%) translateY(-6px);pointer-events:none'),
+    });
+  }
+}
+</script>
+</body>
+</html>
