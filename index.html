@@ -34,6 +34,7 @@
   @keyframes spinslow{to{transform:rotate(360deg)}}
   @keyframes pulsedot{0%,100%{opacity:1}50%{opacity:.35}}
   @keyframes testiprog{from{width:0}to{width:100%}}
+  @media (max-width:900px){ .arv-hero-collage{ display:none } }
 </style>
 <template id="__bundler_thumbnail">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" data-bg-color="#fbfaf7">
@@ -97,18 +98,24 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<header id="top" style="position:relative;max-width:1240px;margin:0 auto;padding:132px 32px 40px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center">
-  <div data-parallax="0.18" style="position:absolute;top:60px;left:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(18,111,184,0.16),transparent 70%);filter:blur(10px);pointer-events:none;will-change:transform"></div>
-  
+<header id="top" style="position:relative;overflow:hidden;padding:120px 32px 0">
 
-  <!-- hero visual: 3-slide feature carousel -->
-  <div style="position:relative">
-    <h1 style="font-size:54px;font-weight:700;margin:0;color:#14151a;max-width:560px">{{ heroLead }}<span style="color:#126FB8">{{ heroWord }}</span>{{ heroTail }}</h1><p style="font-size:18px;line-height:1.55;color:#4b4f5c;margin:20px 0 0;max-width:500px;text-wrap:pretty">{{ heroSubHome }}</p>
-    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:32px">
-      <a href="Arivoo%20Book%20a%20Demo.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:#126FB8;color:#fff;font-weight:600;font-size:16px;padding:15px 26px;border-radius:13px;box-shadow:0 10px 24px rgba(18,111,184,.28);transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px rgba(18,111,184,.36)">{{ ui.bookDemo }} <span>→</span></a>
-      <a href="#products" style="display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid #e5e3dc;color:#14151a;font-weight:600;font-size:16px;padding:15px 24px;border-radius:13px;transition:border-color .2s,transform .2s" style-hover="border-color:#14151a;transform:translateY(-2px)">{{ exploreSuite }}</a>
+  <!-- soft multi-hue blob — one hue per product (UMS/SMS/LMS/TestGUARD), same tokens used across the rest of the site -->
+  <div aria-hidden="true" style="position:absolute;inset:-60px -10% auto -10%;height:900px;pointer-events:none;z-index:0;background:
+      radial-gradient(circle at 18% 22%, rgba(18,111,184,.20), transparent 42%),
+      radial-gradient(circle at 82% 14%, rgba(99,102,241,.16), transparent 42%),
+      radial-gradient(circle at 12% 78%, rgba(31,157,107,.15), transparent 42%),
+      radial-gradient(circle at 86% 80%, rgba(217,130,43,.15), transparent 42%);
+      filter:blur(46px)"></div>
+
+  <!-- centered headline / subhead / CTA -->
+  <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center">
+    <h1 style="font-size:clamp(38px,5.6vw,62px);font-weight:700;margin:0;color:#14151a;text-wrap:balance">{{ heroLead }}<span style="color:#126FB8">{{ heroWord }}</span>{{ heroTail }}</h1>
+    <p style="font-size:18px;line-height:1.55;color:#4b4f5c;margin:20px auto 0;max-width:560px;text-wrap:pretty">{{ heroSubHome }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;justify-content:center">
+      <a href="Arivoo%20Book%20a%20Demo.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:#14151a;color:#fff;font-weight:600;font-size:16px;padding:15px 26px;border-radius:13px;box-shadow:0 16px 34px rgba(20,21,26,.24);transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:0 20px 42px rgba(20,21,26,.3)">{{ ui.bookDemo }} <span>→</span></a>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:26px;margin-top:40px">
+    <div style="display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:32px;justify-content:center">
       <sc-for list="{{ heroPills }}" as="p" hint-placeholder-count="3">
         <div style="display:flex;align-items:center;gap:9px">
           <span style="display:inline-flex;width:20px;height:20px;border-radius:50%;background:#e4f0f9;color:#126FB8;align-items:center;justify-content:center;font-size:12px;font-weight:700">✓</span>
@@ -116,110 +123,104 @@
         </div>
       </sc-for>
     </div>
-  </div><div data-parallax="-0.05" style="position:relative;height:544px;will-change:transform">
-    <div style="position:absolute;top:0;left:0;right:0;bottom:48px;background:#fff;border:1px solid #eceae4;border-radius:22px;box-shadow:0 30px 70px rgba(20,21,26,.12);overflow:hidden;animation:floaty 7s ease-in-out infinite">
-      <div style="display:flex;height:100%;width:300%;transform:{{ heroTransform }};transition:transform .6s cubic-bezier(.16,1,.3,1)">
+  </div>
 
-        <!-- SLIDE 1 · Unified dashboard -->
-        <div style="width:33.3333%;height:100%;flex:none;display:flex;flex-direction:column">
-          <div style="height:44px;border-bottom:1px solid #f0efe9;display:flex;align-items:center;gap:7px;padding:0 16px;flex:none">
-            <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-            <span style="margin-left:12px;font-size:12px;color:#9a9ea9;font-weight:600">arivoo · dashboard</span>
-          </div>
-          <div style="display:grid;grid-template-columns:130px 1fr;flex:1;min-height:0">
-            <div style="border-right:1px solid #f0efe9;padding:16px 12px;display:flex;flex-direction:column;gap:7px">
-              <sc-for list="{{ heroNav }}" as="n" hint-placeholder-count="5">
-                <div style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:{{ n.bg }};font-size:12.5px;font-weight:600;color:{{ n.fg }}"><span style="width:7px;height:7px;border-radius:2px;background:{{ n.dot }}"></span>{{ n.label }}</div>
-              </sc-for>
-            </div>
-            <div style="padding:18px">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-                <div style="background:#f7f6f2;border-radius:13px;padding:14px"><div style="font-size:11px;color:#8b8f9a;font-weight:600">Enrolled</div><div style="font-family:'Bricolage Grotesque';font-size:26px;font-weight:700;margin-top:4px">12,480</div><div style="font-size:11px;color:#1f9d6b;font-weight:700;margin-top:2px">▲ 8.2%</div></div>
-                <div style="background:#e4f0f9;border-radius:13px;padding:14px"><div style="font-size:11px;color:#2b6a9c;font-weight:600">Fees collected</div><div style="font-family:'Bricolage Grotesque';font-size:26px;font-weight:700;margin-top:4px;color:#0e5a96">₹4.2Cr</div><div style="font-size:11px;color:#126FB8;font-weight:700;margin-top:2px">94% cleared</div></div>
-              </div>
-              <div style="background:#f7f6f2;border-radius:13px;padding:15px;margin-top:12px">
-                <div style="font-size:11.5px;color:#8b8f9a;font-weight:600;margin-bottom:12px">Attendance this week</div>
-                <div style="display:flex;align-items:flex-end;gap:9px;height:96px">
-                  <sc-for list="{{ heroBars }}" as="b" hint-placeholder-count="7">
-                    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end">
-                      <div style="width:100%;border-radius:6px 6px 3px 3px;background:linear-gradient(#3f96cf,#126FB8);height:{{ b.h }}"></div>
-                      <span style="font-size:9px;color:#a7abb5;font-weight:600">{{ b.d }}</span>
-                    </div>
-                  </sc-for>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- scattered product-UI collage, tucked around/behind the headline — hidden on narrow screens via .arv-hero-collage below -->
+  <div class="arv-hero-collage" data-parallax="-0.04" style="position:relative;z-index:1;max-width:1280px;height:620px;margin:8px auto 0;will-change:transform">
 
-        <!-- SLIDE 2 · Admissions pipeline -->
-        <div style="width:33.3333%;height:100%;flex:none;display:flex;flex-direction:column">
-          <div style="height:44px;border-bottom:1px solid #f0efe9;display:flex;align-items:center;gap:7px;padding:0 16px;flex:none">
-            <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-            <span style="margin-left:12px;font-size:12px;color:#9a9ea9;font-weight:600">arivoo · admissions</span>
-          </div>
-          <div style="padding:20px 22px;flex:1;display:flex;flex-direction:column">
-            <div style="display:flex;align-items:baseline;justify-content:space-between">
-              <div style="font-family:'Bricolage Grotesque';font-size:17px;font-weight:700;color:#14151a">Admissions pipeline</div>
-              <div style="font-size:11.5px;color:#8b8f9a;font-weight:600">Fall 2026</div>
-            </div>
-            <div style="margin-top:18px;display:flex;flex-direction:column;gap:15px">
-              <sc-for list="{{ admitStages }}" as="s" hint-placeholder-count="5">
-                <div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
-                    <span style="font-size:13px;font-weight:600;color:#3a3d47">{{ s.stage }}</span>
-                    <span style="font-family:'Bricolage Grotesque';font-size:14px;font-weight:700;color:#14151a">{{ s.count }}</span>
-                  </div>
-                  <div style="height:9px;border-radius:100px;background:#f0efe9;overflow:hidden">
-                    <div style="height:100%;border-radius:100px;width:{{ s.pct }};background:{{ s.color }}"></div>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-        </div>
-
-        <!-- SLIDE 3 · AI exam proctoring -->
-        <div style="width:33.3333%;height:100%;flex:none;display:flex;flex-direction:column">
-          <div style="height:44px;border-bottom:1px solid #f0efe9;display:flex;align-items:center;gap:7px;padding:0 16px;flex:none">
-            <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span><span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-            <span style="margin-left:12px;font-size:12px;color:#9a9ea9;font-weight:600">arivoo · testguard</span>
-          </div>
-          <div style="padding:20px 22px;flex:1;display:flex;flex-direction:column">
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <div style="font-family:'Bricolage Grotesque';font-size:17px;font-weight:700;color:#14151a">Live proctoring</div>
-              <div style="display:inline-flex;align-items:center;gap:7px;background:#eafaf3;color:#1f9d6b;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:100px"><span style="width:8px;height:8px;border-radius:50%;background:#1f9d6b;animation:pulsedot 1.6s infinite"></span>238 live exams</div>
-            </div>
-            <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px">
-              <sc-for list="{{ proctorTiles }}" as="t" hint-placeholder-count="6">
-                <div style="background:#f7f6f2;border-radius:12px;padding:11px;display:flex;flex-direction:column;align-items:center;gap:8px">
-                  <div style="position:relative;width:46px;height:46px;border-radius:12px;background:{{ t.bg }};display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:15px;color:{{ t.fg }}">{{ t.init }}<span style="position:absolute;bottom:-3px;right:-3px;width:12px;height:12px;border-radius:50%;border:2px solid #f7f6f2;background:{{ t.dot }}"></span></div>
-                  <span style="font-size:11px;font-weight:600;color:#3a3d47">{{ t.name }}</span>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-        </div>
-
+    <!-- top-left: mini attendance grid -->
+    <div style="position:absolute;top:2%;left:1%;background:#fff;border:1px solid #eceae4;border-radius:16px;padding:12px;box-shadow:0 16px 34px rgba(20,21,26,.12);animation:floaty 7.5s ease-in-out infinite">
+      <div style="display:grid;grid-template-columns:repeat(5,9px);gap:4px">
+        <sc-for list="{{ heroGrid }}" as="c" hint-placeholder-count="10">
+          <span style="width:9px;height:9px;border-radius:3px;background:{{ c }}"></span>
+        </sc-for>
       </div>
     </div>
 
-    <!-- persistent floating accents -->
-    <div style="position:absolute;top:-14px;right:-8px;background:#14151a;color:#fff;border-radius:15px;padding:13px 16px;box-shadow:0 16px 34px rgba(20,21,26,.28);animation:floaty2 6s ease-in-out infinite;z-index:2">
+    <!-- NEP compliance chip -->
+    <div style="position:absolute;top:19%;left:3.5%;background:#fff;border:1px solid #eceae4;border-radius:11px;padding:8px 12px;box-shadow:0 14px 30px rgba(20,21,26,.1);display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:#3a3d47;animation:floaty2 8s ease-in-out infinite">
+      <span style="width:16px;height:16px;border-radius:50%;background:#eafaf3;color:#1f9d6b;display:inline-flex;align-items:center;justify-content:center;font-size:10px">✓</span>NEP compliant
+    </div>
+
+    <!-- fee reminders list card -->
+    <div style="position:absolute;top:38%;left:0;width:190px;background:#fff;border:1px solid #eceae4;border-radius:16px;padding:14px;box-shadow:0 18px 38px rgba(20,21,26,.12);animation:floaty 8.5s ease-in-out infinite">
+      <div style="font-size:11px;font-weight:700;color:#8b8f9a;margin-bottom:9px">Week 1</div>
+      <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid #f2efe9">
+        <span style="width:6px;height:6px;border-radius:50%;background:#d9822b;margin-top:6px;flex:none"></span>
+        <div><div style="font-size:12px;font-weight:700;color:#14151a">Fee reminder sent</div><div style="font-size:11px;color:#9a9ea9">312 parents</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid #f2efe9">
+        <span style="width:6px;height:6px;border-radius:50%;background:#126FB8;margin-top:6px;flex:none"></span>
+        <div><div style="font-size:12px;font-weight:700;color:#14151a">Timetable published</div><div style="font-size:11px;color:#9a9ea9">Grade 8–10</div></div>
+      </div>
+    </div>
+
+    <!-- avatar group -->
+    <div style="position:absolute;top:34%;left:25%;display:flex;align-items:center;background:#fff;border:1px solid #eceae4;border-radius:100px;padding:6px 12px 6px 6px;box-shadow:0 14px 30px rgba(20,21,26,.1);animation:floaty2 7s ease-in-out infinite">
+      <div style="display:flex">
+        <sc-for list="{{ heroAvatars }}" as="a" hint-placeholder-count="3">
+          <img data-src="{{ a }}" alt="" style="width:26px;height:26px;border-radius:50%;border:2px solid #fff;margin-left:-8px;object-fit:cover;background:#eee">
+        </sc-for>
+      </div>
+      <span style="font-size:11.5px;font-weight:700;color:#3a3d47;margin-left:6px">+8</span>
+    </div>
+
+    <!-- decorative icon tile -->
+    <div style="position:absolute;top:6%;left:24%;width:52px;height:52px;border-radius:15px;background:linear-gradient(135deg,#e4f0f9,#cfe6f6);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(18,111,184,.16);animation:floaty 6.5s ease-in-out infinite">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#126FB8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-8"/></svg>
+    </div>
+
+    <!-- central focal card: Arivoo AI chat bubble (mirrors the real widget at the bottom of every page) -->
+    <div style="position:absolute;top:2%;left:50%;transform:translateX(-50%);width:300px;background:#fff;border:1px solid #eceae4;border-radius:18px;padding:14px 16px;box-shadow:0 20px 46px rgba(20,21,26,.16);display:flex;gap:11px;align-items:flex-start;animation:floaty2 6s ease-in-out infinite;z-index:3">
+      <span style="width:28px;height:28px;border-radius:50%;flex:none;margin-top:1px;background:radial-gradient(circle at 32% 28%,#fff,#bfe0ff 28%,#126FB8 62%,#6C4CD8 100%)"></span>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:#14151a">Arivoo AI</div>
+        <div style="font-size:12.5px;color:#5c606b;margin-top:2px;line-height:1.4">Hi! 👋 What would you like to know about Arivoo?</div>
+      </div>
+    </div>
+
+    <!-- attendance bar chart -->
+    <div style="position:absolute;top:26%;left:46%;width:180px;background:#fff;border:1px solid #eceae4;border-radius:16px;padding:14px;box-shadow:0 18px 38px rgba(20,21,26,.12);animation:floaty 9s ease-in-out infinite">
+      <div style="font-size:11px;color:#8b8f9a;font-weight:600;margin-bottom:10px">Attendance this week</div>
+      <div style="display:flex;align-items:flex-end;gap:6px;height:56px">
+        <sc-for list="{{ heroBars }}" as="b" hint-placeholder-count="7">
+          <div style="flex:1;border-radius:4px 4px 2px 2px;background:linear-gradient(#3f96cf,#126FB8);height:{{ b.h }}"></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- pink notification tile -->
+    <div style="position:absolute;top:6%;left:72%;width:52px;height:52px;border-radius:15px;background:linear-gradient(135deg,#fdf1e3,#fbe3c4);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(217,130,43,.18);animation:floaty2 7.5s ease-in-out infinite">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d9822b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </div>
+
+    <!-- fees collected trend -->
+    <div style="position:absolute;top:22%;right:2%;width:200px;background:#fff;border:1px solid #eceae4;border-radius:16px;padding:14px;box-shadow:0 18px 38px rgba(20,21,26,.12);animation:floaty 8s ease-in-out infinite">
+      <div style="font-size:11px;color:#8b8f9a;font-weight:600">Fees collected</div>
+      <div style="font-family:'Bricolage Grotesque';font-size:20px;font-weight:700;margin-top:2px;color:#0e5a96">₹4.2Cr <span style="font-size:11px;font-weight:700;color:#1f9d6b">94%</span></div>
+      <svg viewBox="0 0 160 40" style="width:100%;height:32px;margin-top:6px" preserveAspectRatio="none"><polyline points="0,32 24,26 48,28 72,16 96,20 120,8 144,12 160,4" fill="none" stroke="#126FB8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- live proctoring badge -->
+    <div style="position:absolute;top:46%;right:8%;background:#14151a;color:#fff;border-radius:15px;padding:12px 15px;box-shadow:0 16px 34px rgba(20,21,26,.28);animation:floaty2 6.5s ease-in-out infinite">
       <div style="font-size:11px;color:#9a9ea9;font-weight:600">AI proctoring</div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:4px"><span style="width:9px;height:9px;border-radius:50%;background:#1f9d6b;animation:pulsedot 1.6s infinite"></span><span style="font-family:'Bricolage Grotesque';font-weight:700;font-size:15px">238 live exams</span></div>
     </div>
-    <div style="position:absolute;bottom:66px;left:-24px;background:#fff;border:1px solid #eceae4;border-radius:15px;padding:12px 15px;box-shadow:0 16px 34px rgba(20,21,26,.14);display:flex;align-items:center;gap:11px;animation:floaty 8s ease-in-out infinite;z-index:2">
+
+    <!-- reports nav card -->
+    <div style="position:absolute;top:64%;right:0;width:180px;background:#fff;border:1px solid #eceae4;border-radius:16px;padding:14px;box-shadow:0 18px 38px rgba(20,21,26,.12);animation:floaty 7s ease-in-out infinite">
+      <div style="font-size:11px;font-weight:700;color:#8b8f9a;margin-bottom:9px">Reports</div>
+      <sc-for list="{{ heroReportRows }}" as="r" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12px;font-weight:600;color:#3a3d47"><span style="width:7px;height:7px;border-radius:2px;background:{{ r.dot }}"></span>{{ r.label }}</div>
+      </sc-for>
+    </div>
+
+    <!-- result published notification -->
+    <div style="position:absolute;bottom:1%;left:38%;background:#fff;border:1px solid #eceae4;border-radius:15px;padding:12px 15px;box-shadow:0 16px 34px rgba(20,21,26,.14);display:flex;align-items:center;gap:11px;animation:floaty 8.5s ease-in-out infinite">
       <div style="width:38px;height:38px;border-radius:11px;overflow:hidden;flex:none;background:#eee"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=120&amp;q=80" style="width:100%;height:100%;object-fit:cover" alt=""></div>
       <div><div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:14px">Result published</div><div style="font-size:11.5px;color:#8b8f9a;font-weight:600">Semester V · 1,204 students</div></div>
     </div>
 
-    <!-- carousel dots -->
-    <div style="position:absolute;bottom:12px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:12px">
-      <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
-        <button type="button" onClick="{{ d.go }}" aria-label="{{ d.label }}" style="{{ d.dotStyle }}"></button>
-      </sc-for>
-    </div>
   </div>
 </header>
 
@@ -1030,6 +1031,9 @@ class Component extends DCLogic {
         {label:'Reports',bg:'transparent',fg:'#6b6f7d',dot:'#c9cdd6'},
       ],
       heroBars:[{d:'M',h:'52%'},{d:'T',h:'74%'},{d:'W',h:'61%'},{d:'T',h:'88%'},{d:'F',h:'70%'},{d:'S',h:'44%'},{d:'S',h:'30%'}],
+      heroGrid:['#e4f0f9','#126FB8','#eafaf3','#1f9d6b','#fdf1e3','#d9822b','#eceefe','#6366f1','#e4f0f9','#1f9d6b'],
+      heroAvatars:['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&q=80','https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&q=80','https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&q=80'],
+      heroReportRows:[{dot:'#126FB8',label:'Attendance'},{dot:'#1f9d6b',label:'Finance'},{dot:'#d9822b',label:'Exams'}],
 
       marqueeLogos:['https://arivoo.in/wp-content/uploads/2024/05/IISc.png','https://arivoo.in/wp-content/uploads/2024/05/RCCIIT.png','https://arivoo.in/wp-content/uploads/2024/05/Serampore-college-logo.png','https://arivoo.in/wp-content/uploads/2024/04/tnu.png','https://arivoo.in/wp-content/uploads/2025/11/mit-university-new.jpg','https://arivoo.in/wp-content/uploads/2025/11/kalyani-university.jpg','https://arivoo.in/wp-content/uploads/2025/06/Frame-2462.png','https://arivoo.in/wp-content/uploads/2025/06/Frame-2463-1.png','https://arivoo.in/wp-content/uploads/2024/05/IISc.png','https://arivoo.in/wp-content/uploads/2024/05/RCCIIT.png','https://arivoo.in/wp-content/uploads/2024/05/Serampore-college-logo.png','https://arivoo.in/wp-content/uploads/2024/04/tnu.png','https://arivoo.in/wp-content/uploads/2025/11/mit-university-new.jpg','https://arivoo.in/wp-content/uploads/2025/11/kalyani-university.jpg','https://arivoo.in/wp-content/uploads/2025/06/Frame-2462.png','https://arivoo.in/wp-content/uploads/2025/06/Frame-2463-1.png'],
 
